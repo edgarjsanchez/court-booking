@@ -2,8 +2,8 @@
 // Neon Auth signs tokens with keys published at <NEON_AUTH_URL>/.well-known/jwks.json.
 import type { IncomingMessage } from "node:http";
 import { createRemoteJWKSet, jwtVerify } from "jose";
-import { env } from "./env";
-import { HttpError } from "./http";
+import { env } from "./env.js";
+import { HttpError } from "./http.js";
 
 const jwks = createRemoteJWKSet(new URL(`${env.NEON_AUTH_URL}/.well-known/jwks.json`));
 const issuer = new URL(env.NEON_AUTH_URL).origin;

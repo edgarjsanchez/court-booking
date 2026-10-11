@@ -1,5 +1,5 @@
 import { neon } from "@neondatabase/serverless";
-import { env } from "./env";
+import { env } from "./env.js";
 
 // Neon's serverless driver sends each query over HTTPS: no connection pool to manage.
 const sql = neon(env.DATABASE_URL);

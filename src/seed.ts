@@ -1,5 +1,5 @@
-import { addDays, atHour, addHours, toDateKey } from "./domain/time";
-import type { Booking, Court, Facility, User } from "./domain/types";
+import { addDays, atHour, addHours, toDateKey } from "./domain/time.js";
+import type { Booking, Court, Facility, User } from "./domain/types.js";
 
 export const FACILITY: Facility = {
   id: "riverside",

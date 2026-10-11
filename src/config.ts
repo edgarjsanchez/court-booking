@@ -1,5 +1,5 @@
-import { nowInTimeZone } from "./domain/time";
-import type { BookingRules } from "./domain/types";
+import { nowInTimeZone } from "./domain/time.js";
+import type { BookingRules } from "./domain/types.js";
 
 /** Club rules. Edit these to change how booking works. Used by the app AND the server. */
 export const RULES: BookingRules = {

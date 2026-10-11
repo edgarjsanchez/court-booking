@@ -1,13 +1,13 @@
 // The booking API. Every rule is checked here (the browser can't be trusted),
 // and the database constraints are the final guard against double bookings.
 import type { IncomingMessage, ServerResponse } from "node:http";
-import { RULES, facilityNow } from "../src/config";
-import { buildDaySlots, checkNewBooking } from "../src/domain/rules";
-import { addDays, addHours, toLocalDateTime } from "../src/domain/time";
-import { BookingError, type Booking, type BookingErrorCode, type Court, type Facility } from "../src/domain/types";
-import { optionalUser, requireUser } from "./auth";
-import { query } from "./db";
-import { HttpError, readJson, sendJson } from "./http";
+import { RULES, facilityNow } from "../src/config.js";
+import { buildDaySlots, checkNewBooking } from "../src/domain/rules.js";
+import { addDays, addHours, toLocalDateTime } from "../src/domain/time.js";
+import { BookingError, type Booking, type BookingErrorCode, type Court, type Facility } from "../src/domain/types.js";
+import { optionalUser, requireUser } from "./auth.js";
+import { query } from "./db.js";
+import { HttpError, readJson, sendJson } from "./http.js";
 
 const BOOKING_COLUMNS = `
   id::text as id,
@@ -130,6 +130,10 @@ async function cancelBooking(req: IncomingMessage, id: string) {
 
 export async function handle(req: IncomingMessage, res: ServerResponse) {
   const url = new URL(req.url ?? "/", "http://localhost");
+  // On Vercel, vercel.json rewrites /api/<route> to the single /api function
+  // and passes the original route as ?__route=<route>.
+  const forwarded = url.searchParams.get("__route");
+  if (forwarded !== null) url.pathname = `/api/${forwarded}`;
   const path = url.pathname.replace(/\/+$/, "");
   const method = req.method ?? "GET";
 

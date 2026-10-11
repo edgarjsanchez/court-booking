@@ -1,6 +1,6 @@
 // Pure booking rules. No storage, no UI — easy to test and to reuse on a server.
-import { addHours, atHour, dateOf, daysBetween, hourOf, overlaps, toDateKey, toLocalDateTime } from "./time";
-import type { Booking, BookingErrorCode, BookingRules, Court, DateKey, NewBooking, Slot } from "./types";
+import { addHours, atHour, dateOf, daysBetween, hourOf, overlaps, toDateKey, toLocalDateTime } from "./time.js";
+import type { Booking, BookingErrorCode, BookingRules, Court, DateKey, NewBooking, Slot } from "./types.js";
 
 export type RuleResult = { ok: true } | { ok: false; code: BookingErrorCode; message: string };
 

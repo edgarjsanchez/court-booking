@@ -1,4 +1,4 @@
-import type { DateKey, LocalDateTime } from "./types";
+import type { DateKey, LocalDateTime } from "./types.js";
 
 const pad = (n: number) => String(n).padStart(2, "0");
 

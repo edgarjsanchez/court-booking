@@ -1,15 +1,15 @@
 // Creates the tables and loads the courts from src/seed.ts. Safe to re-run:
 // existing bookings are kept and court details are updated.
-import { COURTS, FACILITY } from "../src/seed";
-import { env } from "./env";
+import { COURTS, FACILITY } from "../src/seed.js";
+import { env } from "./env.js";
 
 if (!env.DATABASE_URL) {
   console.error("DATABASE_URL is missing. Add it to the .env file first (see README).");
   process.exit(1);
 }
 
-const { query } = await import("./db");
-const { SCHEMA } = await import("./schema");
+const { query } = await import("./db.js");
+const { SCHEMA } = await import("./schema.js");
 
 for (const statement of SCHEMA) await query(statement);
 console.log("✓ Tables ready");

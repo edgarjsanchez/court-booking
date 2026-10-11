@@ -130,11 +130,22 @@ src/
   `America/Bogota`). All booking times are the club's local time.
 - **Courts**: edit `src/seed.ts`, then run `npm run db:setup` again.
 
+## Deploying on Vercel
+
+The app deploys to Vercel straight from GitHub: every push to `main` updates
+the live site, and other branches get preview links.
+
+- The React app is built with `vite build` and served as static files.
+- `api/index.ts` is a Vercel Function that runs the same API code as
+  `npm run dev` (`server/app.ts`). `vercel.json` sends every `/api/*` request to it.
+- In Vercel → Project → Settings → **Environment Variables**, set the same three
+  values as your `.env`: `DATABASE_URL`, `NEON_AUTH_URL` and `VITE_NEON_AUTH_URL`.
+  After changing `VITE_NEON_AUTH_URL`, redeploy, because it's built into the page.
+- Server files import each other with `.js` extensions (for example `./db.js`).
+  Vercel runs them without bundling, and Node needs the extension. Keep this when
+  adding server files.
+
 ## Next steps
 
-- **Deploy**: host the API (for example on Render, Railway or Fly.io) and the
-  built app (`npm run build` → `dist/`), then set `VITE_API_URL` to the API's
-  address. If they're on different domains, the API will also need CORS
-  settings, which it doesn't have yet.
 - **Admin screen** to manage courts and hours.
 - **Email confirmations** for bookings.
