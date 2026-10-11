@@ -1,0 +1,35 @@
+{
+  "name": "court-booking",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "concurrently -n api,web -c blue,green \"npm:dev:api\" \"npm:dev:web\"",
+    "dev:web": "vite",
+    "dev:api": "tsx watch server/index.ts",
+    "db:setup": "tsx server/setup-db.ts",
+    "build": "tsc --noEmit && tsc --noEmit -p tsconfig.server.json && vite build",
+    "preview": "vite preview",
+    "test": "vitest run",
+    "test:watch": "vitest"
+  },
+  "dependencies": {
+    "@neondatabase/neon-js": "latest",
+    "@neondatabase/serverless": "^1.0.0",
+    "dotenv": "^16.4.7",
+    "jose": "^6.0.10",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.15.0",
+    "@types/react": "^19.1.0",
+    "@types/react-dom": "^19.1.0",
+    "@vitejs/plugin-react": "^4.4.1",
+    "concurrently": "^9.1.2",
+    "tsx": "^4.19.4",
+    "typescript": "~5.8.3",
+    "vite": "^6.3.5",
+    "vitest": "^3.1.4"
+  }
+}
